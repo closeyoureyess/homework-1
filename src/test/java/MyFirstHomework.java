@@ -3,8 +3,11 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.byValue;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+
 public class MyFirstHomework {
 
     @Test
@@ -18,14 +21,17 @@ public class MyFirstHomework {
         $("#userEmail").setValue("work.qa@mail.ru");
         $("[for=gender-radio-2]").click();
         $("#userNumber").setValue("+78005553535");
-        $("#dateOfBirthInput").clear();
-
-        Thread.sleep(15000);
-
-        $("#dateOfBirthInput").setValue("19 May 2000")
-                .pressEnter();
-        $("#hobbies-checkbox-1").click();
-        $("#uploadPicture").uploadFile(new File("C:\\Users\\vadim\\Downloads meow.txt"));
+        $("#dateOfBirthInput").click();
+        //Это лишнее $("[class=react-datepicker__month-dropdown-container react-datepicker__month-dropdown-container--select]").click();
+        $(".react-datepicker__month-select")
+                .selectOptionByValue("4");
+        $(".react-datepicker__year-select")
+                .selectOptionByValue("2000");
+        $(".react-datepicker__day--019").click();
+        $(".subjects-auto-complete__value-container").click();
+        $("#subjectsInput").setValue("Physics");
+        //pressEnter, либо клик через реакт
+        $("#react-select-2-option-0").click();
 
 
 
