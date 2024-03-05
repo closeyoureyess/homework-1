@@ -32,6 +32,9 @@ public class MyFirstHomework {
         $("#subjectsInput").setValue("Physics");
         //pressEnter, либо клик через реакт
         $("#react-select-2-option-0").click();
+        //$(byText("Music")).click();
+        $("[for=hobbies-checkbox-3]").click();
+        $("#uploadPicture").uploadFile(new File("C:\\Users\\vadim\\Downloads\\meow.txt"));
 
 
 
