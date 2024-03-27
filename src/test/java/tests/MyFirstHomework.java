@@ -1,6 +1,9 @@
+package tests;
+
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.Test;
+import pages.RegistrationPage;
 
 import java.io.File;
 
@@ -16,18 +19,14 @@ public class MyFirstHomework {
     void myTest() {
         Configuration.pageLoadStrategy = "eager";
         Configuration.holdBrowserOpen = true;
+        Configuration.browser = "Firefox";
+        Configuration.browserSize = "1920x1080";
 
-        String userName = "Vadim";
-        String userLastName = "QATest";
 
-        open("https://demoqa.com/automation-practice-form");
-
-        Selenide.executeJavaScript("$('fixedban').remove()");
-        Selenide.executeJavaScript("$('footer').remove()");
-
-        $("#firstName").setValue(userName);
-        $("#lastName").setValue(userLastName);
-        $("#userEmail").setValue("work.qa@mail.ru");
+        new RegistrationPage().openPage();
+        new RegistrationPage().setFirstName("Vadim");
+        new RegistrationPage().setLastName("QA");
+        new RegistrationPage().setEmail("vadim@mail.ru");
 //        $("[for=gender-radio-2]").click(); //okay
 //        $(byName("gender")).selectRadio("Female"); // okay(2)
         $("#gender-radio-2").parent().click();
@@ -58,12 +57,11 @@ public class MyFirstHomework {
 
         $(".modal-dialog").should(appear);
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text(userName), text(userLastName), text("work.qa@mail.ru"), text("Female"),
+        $(".table-responsive").shouldHave(text(), text(userLastName), text("work.qa@mail.ru"), text("Female"),
                 text("8800555353"), text("30 May,2000"), text("Physics"), text("Music"), text("meow.txt"), text("New-York, Down East-Side"),
                 text("Haryana Panipat"));
 
-        $("#closeLargeModal").click();
-
+        $("div.modal-footer button").click();
 
     }
 }
